@@ -1,0 +1,134 @@
+
+<title>Conex Contact - Operações</title>
+
+<div id="page-top">
+
+  {{>_menuPainel}}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Operações</li>
+        </ol>
+
+          <!-- Modal alerta -->
+          <div class="modal fade" id="modalAlerta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Enviar alerta</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form action="/admin/alertarUsuario" method="POST">                
+                  <div class="modal-body">
+                    <label for="titulo">Titulo: </label>
+                    <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Alerta de pagamento!" value="Alerta de pagamento!">
+
+                    <label class="mt-2" for="mensagem">Mensagem: </label>
+                    <textarea type="text" class="form-control" name="mensagem" id="mensagem" placeholder="Olá! o seu pagamento não foi identificado, o que você deseja fazer a respeito?">Olá! o seu pagamento não foi identificado, o que você deseja fazer a respeito?</textarea>
+
+                    <label class="mt-2" for="cor">Cor: </label>
+                    <select name="cor" id="cor" class="form-control">
+                      <option value="warning">Amarelo</option>
+                      <option value="danger">Vermelho</option>
+                    </select>
+
+                    <input type="hidden" name="idOperacao" id="idOperacao2">
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-warning">Enviar alerta!</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        <!-- Area Chart Example-->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-handshake"></i>
+            Operações realizadas</div>
+          <div class="card-body">
+            
+            {{#each operacao}}
+              <div class="card mb-3">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <img src="{{lista.imagem}}" class="card-img">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Lista de {{lista.nome}}</h5>
+                      <p class="card-text">
+                        <b>Comprador: </b>{{usuario.nome}} {{usuario.sobrenome}} <br />
+                        <b>Protocolo: </b>{{_id}} <br />
+
+                        <div class="mt-3">
+                          <form method="POST">
+                            <input type="hidden" name="idOperacao" value="{{_id}}">
+                            <button formaction="/admin/aprovarPagamento" type="submit" class="btn btn-success">Aprovar</button>
+                            <button formaction="/admin/reprovarPagamento" type="submit" class="btn btn-danger">Reprovar</button>
+                            <button id="{{_id}}" onclick="transferirOperacao(this.id)" type="button" data-toggle="modal" data-target="#modalAlerta" class="btn btn-warning">Alertar</button>
+                          </form>
+                        </div>
+                      </p>
+                      <p class="card-text"><small class="text-muted">{{data}}</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+
+          </div>
+          <div class="card-footer small text-muted">Ultima compra: 16 dias atrás ás 11:59</div>
+        </div>
+
+
+      </div>
+      <!-- /.container-fluid -->
+
+      {{>_footer}}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Selecione "Sair" se você esta pronto para encerrar sua sessão atual.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-primary" href="/usuarios/logout">Sair</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script src="/js/lista.js"></script>

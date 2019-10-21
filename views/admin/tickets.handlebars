@@ -1,0 +1,149 @@
+
+<title>Conex Contact - Ajuda</title>
+
+<div id="page-top">
+
+  {{>_menuPainel}}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Ajuda</li>
+        </ol>
+
+        <!-- Modal responder ticket -->
+        <div class="modal fade" id="modalTicket" tabindex="-1" role="dialog" aria-labelledby="ticketTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Responder ticket</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST">
+                        <div class="modal-body">
+                            <input type="hidden" name="idTicket" id="idTicket2">
+                            <h5>Responder ticket</h5>
+                            <p>Digite a resposta abaixo: </p>
+                            <textarea class="form-control mt-2" name="resposta" id="" cols="30" rows="10" placeholder="Escreva aqui a sua resposta" required></textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button formaction="/admin/responderTicket" type="submit" class="btn btn-success">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Fim da modal -->
+
+        <!-- Modal excluir ticket -->
+        <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="ticketTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Excluir ticket</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST">
+                        <input type="hidden" name="idTicket" id="idTicket3">
+                        <div class="modal-body">
+                            
+                            <h5 style="color: red">Você tem noção do que você está fazendo?</h5>
+                            
+                            <b>Espere um pouco! respire e conte até 10.</b>
+                            
+                            <p class="mt-2">Excluindo um ticket, você estará negligenciando a duvida do seu cliente :(</p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button formaction="/admin/excluirTicket" type="submit" class="btn btn-danger">Excluir mesmo assim!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Fim da modal -->
+
+        <!-- Area Chart Example-->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-lightbulb"></i>
+            Central de ajuda e suporte</div>
+          <div class="card-body">
+            {{#each ticket}}
+                <div class="card">
+                    <form method="post">
+                        <div class="card-header">{{assunto}}</div>
+                        <div class="card-body">
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Nome: </b>{{ nome }}</li>
+                                <li class="list-group-item"><b>Assunto: </b>{{ assunto }}</li>
+                                <li class="list-group-item"><b>Descrição: </b>{{ descricao }}</li>
+                            </ul>
+                            
+                            <button id="{{_id}}" onclick="transferirTicketResponder(this.id)" type="button" class="btn btn-success mt-3" data-toggle="modal" data-target="#modalTicket">Responder</button>
+                            <button id="{{_id}}" onclick="transferirTicketExcluir(this.id)" type="button" class="btn btn-danger mt-3" data-toggle="modal" data-target="#modalExcluir">Excluir</button>
+                        </div>
+                    </form>
+                </div>
+            <hr />
+            {{else}}
+                <div>Uffa, não existe nenhum ticket pendente!</div>
+            {{/each}}
+
+          </div>
+          <div class="card-footer small text-muted">Obrigado por visitar nossa central de ajuda!</div>
+        </div>
+
+
+      </div>
+      <!-- /.container-fluid -->
+
+      {{>_footer}}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Selecione "Sair" se você esta pronto para encerrar sua sessão atual.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-primary" href="/usuarios/logout">Sair</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script src="/js/lista.js"></script>

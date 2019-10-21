@@ -1,0 +1,135 @@
+
+<title>Conex Contact - Ajuda</title>
+
+<div id="page-top">
+
+  {{>_menuPainel}}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Ajuda</li>
+        </ol>
+
+        <!-- Area Chart Example-->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-lightbulb"></i>
+            Central de ajuda e suporte</div>
+          <div class="card-body">
+            
+            <h5>Está tendo problemas ao utilizar nossa plataforma?</h5>
+                    <p>Enviar um ticket é a forma mais eficiente de entrar em contato conosco, descreva sua situação e nós entraremos em contato o mais breve possível!</p>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#ticket">Enviar um ticket</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="ticket" tabindex="-1" role="dialog" aria-labelledby="ticketTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Entrar em contato</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Obrigado por abrir um ticket</h5>
+                            <p>Descreva abaixo o seu caso, entraremos em contato o mais breve possível!</p>
+                            <form action="/usuarios/abrirTicket" method="POST">
+                                <label for="nome">Nome: </label>
+                                <input class="form-control" id="nome" name="nome" type="text" value="{{user.nome}} {{user.sobrenome}}" required readonly>
+                                
+                                <label class="mt-2" for="assunto">Assunto: </label>
+                                <input class="form-control" id="assunto" name="assunto" type="text" placeholder="Não consigo fazer tal coisa..." required>
+                                
+                                <label class="mt-2" for="descricao">Descreva o problema: </label>
+                                <textarea class="form-control" name="descricao" id="descricao" rows="5"  placeholder="Quando eu tento fazer tal coisa, acontece isso, isso e aquilo outro!" required></textarea>
+                                   
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn-success">Enviar</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- Fim da modal -->
+
+                    <hr />
+
+                    <h5>Meus tickets: </h5>
+                    <br />
+                    {{#each ticket}}
+
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{assunto}}</h5>
+                            <small class="text-muted">{{data}}</small>
+                            </div>
+                            <p class="mb-1">{{descricao}}</p>
+
+                                {{#if resposta}}
+                                    <p style="color: green;"><b>{{resposta}}</b></p>
+                                {{else}}
+                                    <p style="color: red;">Seu ticket está em análise, responderemos em breve.</p>
+                                {{/if}}
+
+                            <small class="text-muted">Protocolo: {{_id}}</small>
+                        </a>
+
+                    {{else}}
+                        <div>Você não tem nenhum ticket!</div>
+                    {{/each}}
+
+          </div>
+          <div class="card-footer small text-muted">Obrigado por visitar nossa central de ajuda!</div>
+        </div>
+
+
+      </div>
+      <!-- /.container-fluid -->
+
+      {{>_footer}}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Selecione "Sair" se você esta pronto para encerrar sua sessão atual.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-primary" href="/usuarios/logout">Sair</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script src="/js/lista.js"></script>

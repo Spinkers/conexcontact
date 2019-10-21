@@ -1,0 +1,144 @@
+  <title>Conex Contact</title>
+
+<div id="page-top">
+
+  <!-- Modal VISÃO GERAL -->
+  <div class="modal fade" id="modalVisaoGeral" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="TituloModalCentralizado">Visão geral</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span id="cidade">Cidade: </span> <br>
+          <span id="empresa">Empresa: </span> <br>
+          <span id="site">Site: </span> <br>
+          <span id="endereco">Endereço: </span> <br>
+          <span id="telefone">Tel. fixo: </span> <br>
+          <span id="whatsapp">WhatsApp: </span> <br>
+          <span id="email">Email: </span> <br>
+          <span id="observacoes">Observação: </span> <br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Imprimir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{>_menuPainel}}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Lista</li>
+        </ol>
+
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Lista de arquitetos</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Cidade</th>
+                    <th>Empresa</th>
+                    <th>Site</th>
+                    <th>Visualizar</th>
+                    <th>Favoritar</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Cidade</th>
+                    <th>Empresa</th>
+                    <th>Site</th>
+                    <th>Visualizar</th>
+                    <th>Favoritar</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {{#each contato}}
+                        <tr id="{{_id}}***">
+                          <td>{{cidade}}</td>
+                          <td>{{empresa}}</td>
+                          <td>{{site}}</td>
+                          <input name="endereco" type="hidden" value="{{endereco}}">
+                          <input name="telefone" type="hidden" value="{{telefone}}">
+                          <input name="whatsapp" type="hidden" value="{{whatsapp}}">
+                          <input name="email" type="hidden" value="{{email}}">
+                          <input name="observacoes" type="hidden" value="{{observacoes}}">
+                          <td><button id="{{_id}}" onclick="transferirDados(this.id)" class="btn btn-primary" data-toggle="modal" data-target="#modalVisaoGeral"><i class="fas fa-fw fa-eye"></i></button></td>
+                          <td>
+                            <form action="/usuarios/favoritar" method="POST">
+                              <input name="id" type="hidden" value="{{_id}}">                            
+                              <button type="submit" class="btn btn-warning"><i class="fas fa-fw fa-star"></i></button>
+                            </form>
+                          </td>
+                        </tr>
+                    </form>
+                  {{else}}
+
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+
+        <p class="small text-center text-muted my-5">
+              Em desenvolvimento
+        </p>
+
+      </div>
+      <!-- /.container-fluid -->
+
+            {{>_footer}}
+
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Selecione "Sair" se você esta pronto para encerrar sua sessão atual.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-primary" href="/usuarios/logout">Sair</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script src="/js/lista.js"></script>

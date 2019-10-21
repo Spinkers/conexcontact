@@ -1,0 +1,95 @@
+
+  <title>Conex Contact - Novo Contato</title>
+
+<body id="page-top">
+
+  {{>_menuPainel}}  
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="index.html">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Novo contato</li>
+        </ol>
+
+        <!-- Page Content -->
+        <h1>Novo contato</h1>
+        <hr>
+
+        <form action="/admin/novoContato" method="POST">
+            <label for="cidade">Cidade: </label>
+            <input type="text" id="cidade" name="cidade" class="form-control" placeholder="São Paulo" required>
+
+            <label class="mt-2" for="empresa">Empresa: </label>
+            <input type="text" id="empresa" name="empresa" class="form-control" placeholder="Conex Code" required>
+
+            <label class="mt-2" for="site">Site: </label>
+            <input type="text" id="site" name="site" class="form-control" placeholder="www.conexcode.com" required>
+
+            <label class="mt-2" for="endereco">Endereço: </label>
+            <input type="text" id="endereco" name="endereco" class="form-control" placeholder="Rua: 09 de Julho, Número: 666, Bairro: Centro." required>
+
+            <label class="mt-2" for="telefone">Telefone: </label>
+            <input type="text" id="telefone" name="telefone" class="form-control" placeholder="(11) 99750-6752" required>
+
+            <label class="mt-2" for="whatsapp">WhatsApp: </label>
+            <input type="text" id="whatsapp" name="whatsapp" class="form-control" placeholder="(11) 99750-6752" required>
+
+            <label class="mt-2" for="email">Email: </label>
+            <input type="text" id="email" name="email" class="form-control" placeholder="contato@conexcode.com" required>
+
+            <label class="mt-2" for="observacoes">Observações: </label>
+            <textarea type="text" id="observacoes" name="observacoes" class="form-control" placeholder="Negociar com fulano de tal..." required></textarea>
+
+            <label class="mt-2" for="categoria">Categoria: </label>
+            <select name="categoria" id="categoria" class="form-control">
+                {{#each categoria}}
+                <option value="{{_id}}">{{nome}}</option>
+                {{/each}}
+            </select>
+
+            <button type="submit" class="btn btn-primary mt-3">Salvar</button>
+        </form>
+
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+            {{>_footer}}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>

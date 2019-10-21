@@ -1,0 +1,110 @@
+
+<title>Conex Contact - Catalogo</title>
+
+<div id="page-top">
+
+  {{>_menuPainel}}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Catalogo</li>
+        </ol>
+
+
+        <!-- Modal de confirmação -->
+        <div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Confirmação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="/usuarios/adquirirLista" method="POST">
+                <div class="modal-body">
+                  Você tem certeza de que deseja efetuar a <b>compra</b> desta lista?
+                  <br />
+                  Produto em questão: <span style="color: green" id="produtoQuestao"></span>
+                  <input type="hidden" name="idLista" id="idLista">
+                  <input type="hidden" name="idUsuario" value="{{user._id}}">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                  <button type="submit" class="btn btn-primary">Sim, comprar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Area Chart Example-->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-id-card"></i>
+            Listas disponíveis</div>
+          <div class="card-body">
+            
+            {{#each categoria}}
+            <div id="{{_id}}***" class="card" style="width: 18rem; display: inline-block">
+              <img src="{{imagem}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Lista de {{nome}}</h5>
+                <p class="card-text">
+                  {{descricao}}
+                </p>
+                <button id="{{_id}}" onclick="transferirCatalogo(this.id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalConfirmacao">Adquirir</button>
+              </div>
+            </div>
+            {{/each}}
+
+          </div>
+          <div class="card-footer small text-muted">Ultima compra: 16 dias atrás ás 11:59</div>
+        </div>
+
+
+      </div>
+      <!-- /.container-fluid -->
+
+      {{>_footer}}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Selecione "Sair" se você esta pronto para encerrar sua sessão atual.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-primary" href="/usuarios/logout">Sair</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script src="/js/lista.js"></script>
